@@ -15,6 +15,7 @@ class Oauth::ClientController < ApplicationController
 
     if self.provider.access_token(params) && self.oauth_user.id && ! self.oauth_user.end_user.editor?
       self.oauth_user.update_data(self.provider)
+      session[:oauth_logged_in] = true
       process_login self.oauth_user.end_user
     else
       flash[:notice] = 'OAuth login failed' 

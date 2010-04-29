@@ -11,7 +11,7 @@ module OauthProvider
       info ? info[:class].new(session) : nil
     end
 
-    def self.provider_options(name)
+    def self.provider_options
       self.get_handler_info(:oauth, :provider).collect { |info| [info[:name], info[:name].downcase.underscore] }
     end
 

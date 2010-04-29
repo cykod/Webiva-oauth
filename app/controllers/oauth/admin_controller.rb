@@ -15,6 +15,8 @@ class Oauth::AdminController < ModuleController
     "Options" => { :controller => '/options' },
     "Modules" => { :controller => '/modules' }
 
+  register_handler :editor, :auth_login_feature, 'OauthLoginExtension'
+
  permit 'oauth_config'
 
  public 
