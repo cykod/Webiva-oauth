@@ -61,6 +61,7 @@ class OauthUser < DomainModel
     self.update_attributes provider.get_oauth_user_data
 
     if can_update_end_user
+      self.end_user.email = self.email if self.end_user.email.blank?
       self.end_user.first_name = self.first_name
       self.end_user.last_name = self.last_name
       self.end_user.admin_edit = true if self.end_user.email.blank?
