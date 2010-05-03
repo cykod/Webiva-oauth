@@ -4,7 +4,7 @@ module OauthProvider
   class Base
     include HandlerActions
 
-    attr_accessor :return_url, :session
+    attr_accessor :return_url
 
     def self.provider(name, session)
       info = self.get_handler_info(:oauth, :provider).find { |info| info[:name].downcase.underscore == name }
@@ -16,7 +16,7 @@ module OauthProvider
     end
 
     def initialize(session)
-      self.session = session
+      @session = session
     end
 
     def info; @info ||= self.class.oauth_provider_handler_info; end
@@ -26,6 +26,10 @@ module OauthProvider
     def session_name; "oauth_#{self.option_name}"; end
     def get_oauth_user_data; {}; end
     def get_profile_photo_url; nil; end
+
+    def session
+      @session[self.session_name] ||= {}
+    end
 
     def redirect_uri=(redirect_uri)
       @redirect_uri = redirect_uri
