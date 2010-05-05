@@ -15,7 +15,7 @@ module OauthProvider
       self.get_handler_info(:oauth, :provider).collect { |info| [info[:name], info[:name].downcase.underscore] }
     end
 
-    def initialize(session)
+    def initialize(session={})
       @session = session
     end
 
