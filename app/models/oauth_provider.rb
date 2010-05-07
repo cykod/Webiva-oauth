@@ -35,6 +35,18 @@ module OauthProvider
       @session[self.session_name] = nil
     end
 
+    def token
+      self.session[:token]
+    end
+
+    def token=(token)
+      self.session[:token] = token
+    end
+
+    def logged_in?
+      self.token ? true : false
+    end
+
     def redirect_uri=(redirect_uri)
       @redirect_uri = redirect_uri
     end
