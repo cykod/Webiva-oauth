@@ -31,6 +31,10 @@ module OauthProvider
       @session[self.session_name] ||= {}
     end
 
+    def clear_session
+      @session[self.session_name] = nil
+    end
+
     def redirect_uri=(redirect_uri)
       @redirect_uri = redirect_uri
     end

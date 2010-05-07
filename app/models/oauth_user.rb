@@ -21,7 +21,6 @@ class OauthUser < DomainModel
     return user if user
 
     user = OauthUser.new :provider => provider.option_name, :provider_id => provider.provider_id
-    user.attributes = provider.get_oauth_user_data
     user.push_end_user(myself)
     user.save
     user
@@ -41,7 +40,7 @@ class OauthUser < DomainModel
       end
     end
 
-    self.end_user_id = myself.id unless myself.editor?
+    self.end_user_id = myself.id unless myself.client_user?
   end
 
   def update_data(provider)
