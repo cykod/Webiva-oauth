@@ -10,6 +10,9 @@ class Oauth::AdminController < ModuleController
  register_permissions :oauth, [ [ :manage, 'Manage Oauth', 'Manage Oauth' ],
                                   [ :config, 'Configure Oauth', 'Configure Oauth' ]
                                   ]
+
+linked_models :end_user, [ :oauth_user ] 
+ 
  cms_admin_paths "options",
     "Oauth Options" => { :action => 'index' },
     "Options" => { :controller => '/options' },
@@ -40,9 +43,13 @@ class Oauth::AdminController < ModuleController
   end
   
   class Options < HashModel
-   # Options attributes 
-   # attributes :attribute_name => value
+    attributes :user_class_id => UserClass.default_user_class_id
   
+    def validate
+      cls = UserClass.find_by_id_and_editor(self.user_class_id,false)
+      errors.add(:user_class_id,'is invalid') unless cls
+    end
+
   end
   
 end

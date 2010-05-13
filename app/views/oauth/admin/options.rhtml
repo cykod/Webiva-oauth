@@ -1,6 +1,7 @@
 <div class='admin_content'>
 <% admin_form_for :options, @options do |f| -%>
 
+  <%= f.select :user_class_id, UserClass.options %>
 <%= f.submit_tag 'Save' %>
 
 <%  end -%>

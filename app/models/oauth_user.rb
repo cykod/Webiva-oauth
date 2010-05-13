@@ -28,14 +28,18 @@ class OauthUser < DomainModel
 
   def push_end_user(myself)
     unless myself.id
+      opts = Oauth::AdminController.module_options
       if ! self.email.blank?
-        myself = EndUser.push_target(self.email)
+        myself = EndUser.push_target(self.email,:user_class_id => opts.user_class_id)
       else
         myself = EndUser.new
+        myself.user_class_id = opts.user_class_id
         myself.admin_edit = true
       end
 
+
       if myself.id.nil? || ! myself.registered?
+
         myself.update_attributes :registered => true, :activated => true, :hashed_password => 'invalid'
       end
     end
