@@ -17,6 +17,8 @@ class OauthUser < DomainModel
   end
 
   def self.push_oauth_user(myself, provider)
+    return OauthUser.new if provider.provider_id.blank?
+
     user = OauthUser.by_provider(provider).find(:first)
     return user if user
 
