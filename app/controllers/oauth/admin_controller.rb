@@ -2,7 +2,7 @@
 class Oauth::AdminController < ModuleController
 
  component_info 'Oauth', :description => 'Oauth support', 
-                              :access => :public
+                              :access => :private
                               
  # Register a handler feature
  register_permission_category :oauth, "Oauth" ,"Permissions related to Oauth"
