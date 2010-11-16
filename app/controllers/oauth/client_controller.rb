@@ -2,7 +2,7 @@
 class Oauth::ClientController < ApplicationController
 
   def login
-    return :nothing => true unless self.provider
+    return render :nothing => true unless self.provider
     return render :text => 'Admins can not use oauth' if myself.client_user?
 
     self.provider.return_url = self.return_url
