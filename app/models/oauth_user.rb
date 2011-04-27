@@ -39,10 +39,10 @@ class OauthUser < DomainModel
         myself.admin_edit = true
       end
 
-
       if myself.id.nil? || ! myself.registered?
-
-        myself.update_attributes :registered => true, :activated => true, :hashed_password => 'invalid'
+        myself.update_attributes :registered => true, :activated => true, :hashed_password => 'invalid', :user_level => EndUser::UserLevel::LEAD
+      else
+        myself.elevate_user_level EndUser::UserLevel::LEAD
       end
     end
 
