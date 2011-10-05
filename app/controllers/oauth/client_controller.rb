@@ -24,7 +24,7 @@ class Oauth::ClientController < ApplicationController
 
       session[:oauth_logged_in] = true
       if  myself.id != self.oauth_user.end_user_id
-        self.oauth_user.end_user.update_attribute(:lead_source,myself.source_user_id) if myself.source_user_id.present?
+        self.oauth_user.end_user.update_attribute(:source_user_id,myself.source_user_id) if myself.source_user_id.present?
         process_login(self.oauth_user.end_user)
       end
     else
